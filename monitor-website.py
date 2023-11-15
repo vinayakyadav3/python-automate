@@ -10,7 +10,6 @@ EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 LINODE_TOKEN = os.environ.get('LINODE_TOKEN')
 
-
 def restart_server_and_container():
     # restart linode server
     print('Rebooting the server...')
@@ -26,7 +25,6 @@ def restart_server_and_container():
             restart_container()
             break
 
-
 def send_notification(email_msg):
     print('Sending an email...')
     with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
@@ -36,7 +34,6 @@ def send_notification(email_msg):
         message = f"Subject: SITE DOWN\n{email_msg}"
         smtp.sendmail(EMAIL_ADDRESS, EMAIL_ADDRESS, message)
 
-
 def restart_container():
     print('Restarting the application...')
     ssh = paramiko.SSHClient()
@@ -45,7 +42,6 @@ def restart_container():
     stdin, stdout, stderr = ssh.exec_command('docker start c3e706bc905e')
     print(stdout.readlines())
     ssh.close()
-
 
 def monitor_application():
     try:
@@ -62,7 +58,6 @@ def monitor_application():
         msg = 'Application not accessible at all'
         send_notification(msg)
         restart_server_and_container()
-
 
 schedule.every(5).minutes.do(monitor_application)
 
