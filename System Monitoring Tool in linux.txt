@@ -1,0 +1,13 @@
+#System Monitoring Tool in linux
+import psutil
+
+def monitor_system():
+    cpu_usage = psutil.cpu_percent(interval=1)
+    memory_usage = psutil.virtual_memory().percent
+    disk_space = psutil.disk_usage('/').percent
+
+    print(f"CPU Usage: {cpu_usage}%")
+    print(f"Memory Usage: {memory_usage}%")
+    print(f"Disk Space: {disk_space}%")
+
+monitor_system()
