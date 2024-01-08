@@ -1,0 +1,37 @@
+#Automated Deployment Script linux
+
+#Make sure to replace '/path/to/source', '/path/to/destination', and 'your_service_name' with the actual paths and service name you are working with
+#make sure sudo permissions and file permissions
+
+
+
+
+import shutil
+import subprocess
+
+def deploy_files(source_dir, destination_dir):
+    try:
+        # Copy files from source to destination
+        shutil.copytree(source_dir, destination_dir)
+        print("Files successfully deployed.")
+    except Exception as e:
+        print(f"Error deploying files: {e}")
+
+def restart_service(service_name):
+    try:
+        # Restart the specified service
+        subprocess.run(['sudo', 'systemctl', 'restart', service_name])
+        print(f"Service '{service_name}' restarted.")
+    except Exception as e:
+        print(f"Error restarting service: {e}")
+
+if __name__ == "__main__":
+    # Replace these paths with your actual source and destination directories
+    source_directory = '/path/to/source'
+    destination_directory = '/path/to/destination'
+
+    # Replace this with the name of the service you want to restart
+    service_to_restart = 'your_service_name'
+
+    deploy_files(source_directory, destination_directory)
+    restart_service(service_to_restart)

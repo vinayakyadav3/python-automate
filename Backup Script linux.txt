@@ -1,0 +1,8 @@
+#Backup Script
+import shutil
+import os
+
+source_dir = '/path/to/source'
+backup_dir = '/path/to/backup'
+
+shutil.copytree(source_dir, os.path.join(backup_dir, 'backup_' + time.strftime('%Y%m%d%H%M%S')))

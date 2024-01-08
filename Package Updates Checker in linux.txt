@@ -1,0 +1,8 @@
+#Package Updates Checker in linux
+import subprocess
+
+def check_updates():
+    subprocess.run(['sudo', 'apt', 'update'])
+    subprocess.run(['sudo', 'apt', 'upgrade', '-y'])
+
+check_updates()

@@ -1,0 +1,18 @@
+#Deleting a user account
+import getpass
+
+def root_check():
+ """Exit if login name not root."""
+ if not getpass.getuser() == "root":
+   print("You must be root to run this program.")
+   sys.exit(1)
+
+def delete_user():
+ """Delete a user account."""
+ root_check()
+ username = input("Enter the username to delete: ")
+ system("userdel -r " + username)
+ print("User account deleted successfully!")
+
+if __name__ == "__main__":
+ delete_user()

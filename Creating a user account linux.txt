@@ -1,0 +1,18 @@
+#Creating a user account
+import getpass
+
+def root_check():
+ """Exit if login name not root."""
+ if not getpass.getuser() == "root":
+   print("You must be root to run this program.")
+   sys.exit(1)
+
+def create_user():
+ """Create a user account."""
+ root_check()
+ username = input("Enter the username to create: ")
+ system("useradd -m " + username)
+ print("User account created successfully!")
+
+if __name__ == "__main__":
+ create_user()

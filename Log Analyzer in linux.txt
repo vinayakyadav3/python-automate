@@ -1,0 +1,15 @@
+#Log Analyzer in linux
+import re
+
+log_file_path = '/path/to/logfile.log'
+
+def analyze_log(file_path):
+    with open(file_path, 'r') as file:
+        logs = file.readlines()
+
+    for log in logs:
+        # Add your specific log analysis logic here
+        if re.search(r'ERROR', log):
+            print(f"Error detected: {log}")
+
+analyze_log(log_file_path)

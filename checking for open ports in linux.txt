@@ -1,0 +1,33 @@
+#checking for open ports in linux
+
+#Replace 'your_host' with the actual host or IP address you want to check, and adjust the target_ports list to include the ports you're interested in.
+#This script uses the socket.connect_ex() method to attempt a connection to each specified port. If the result is 0, the connection was successful, indicating an open port. The open ports are then printed to the console.
+
+import socket
+
+def check_open_ports(host, port_list):
+    open_ports = []
+
+    for port in port_list:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+        result = sock.connect_ex((host, port))
+        if result == 0:
+            open_ports.append(port)
+        sock.close()
+
+    return open_ports
+
+if __name__ == "__main__":
+    # Replace 'your_host' with the target host or IP address
+    target_host = 'your_host'
+
+    # Specify the ports you want to check
+    target_ports = [80, 443, 22, 8080]
+
+    open_ports = check_open_ports(target_host, target_ports)
+
+    if open_ports:
+        print(f"Open ports on {target_host}: {', '.join(map(str, open_ports))}")
+    else:
+        print(f"No open ports found on {target_host}.")
